@@ -1,0 +1,1 @@
+"npm test" is used to test the module.
