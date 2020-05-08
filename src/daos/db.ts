@@ -20,4 +20,3 @@ export const db = new Pool({
     user: process.env.NODE_APP_ROLE,
     password: process.env.NODE_APP_PASS
 });
-test
