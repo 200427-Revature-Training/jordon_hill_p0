@@ -32,3 +32,16 @@ export function savePokemon(pokemon: any): Promise<Pokemon> {
         return new Promise((resolve, reject) => reject(422));
     }
 }
+
+export function patchPokemon(input: any): Promise<Pokemon> {
+    const pokemon = new Pokemon(
+        input.id, input.name,
+        input.species, input.boxID, input.userID
+    );
+
+    if (!pokemon.id) {
+        throw new Error('400');
+    }
+
+    return pokemonDao.patchPokemon(pokemon);
+}

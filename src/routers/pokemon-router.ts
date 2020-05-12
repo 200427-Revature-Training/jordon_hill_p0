@@ -1,5 +1,6 @@
 import express from 'express';
 import * as pokemonService from '../services/pokemon-service';
+import * as userService from '../services/user-service';
 
 export const pokemonRouter = express.Router();
 
@@ -54,4 +55,22 @@ pokemonRouter.post('', (request, response, next) => {
             console.log(err);
             response.sendStatus(500);
         });
+});
+
+/* PATCH is an HTTP method that serves as partial replacement */
+pokemonRouter.patch('', (request, response, next) => {
+    const pokemon = request.body;
+    pokemonService.patchPokemon(pokemon)
+        .then(updatedPokemon => {
+            if(updatedPokemon) {
+                response.json(updatedPokemon);
+            } else {
+                response.sendStatus(404);
+            }
+        }).catch(err => {
+            console.log(err);
+            response.sendStatus(500);
+        }).finally(() => {
+            next();
+        })
 });

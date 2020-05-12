@@ -32,28 +32,26 @@ export function getPokemonById(id: number): Promise<Pokemon> {
 
     // Use parameterized queries to avoid SQL Injection
     // $1 -> Parameter 1 placeholder
-    const sql = 'SELECT * FROM pokemon WHERE id = $1';
+    const sql = 'SELECT * FROM project0.pokemon WHERE id = $1';
 
     return db.query<PokemonRow>(sql, [id])
         .then(result => result.rows.map(r => Pokemon.from(r))[0]);
 }
 
 export function savePokemon(pokemon: Pokemon): Promise<Pokemon> {
-    const sql = `INSERT INTO pokemon (name, species, box_id, user_id) \
+    const sql = `INSERT INTO project0.pokemon (name, species, box_id, user_id) \
 VALUES ($1, $2, $3, $4) RETURNING *`;
 
-    return db.query<PokemonRow>(sql, [
-        pokemon.id,
-        pokemon.name,
-        pokemon.species,
-        pokemon.boxID,
-        pokemon.userID
-    ]).then(result => result.rows.map(r => Pokemon.from(r))[0]);
+const params = [pokemon.name, pokemon.species,
+    pokemon.boxID, pokemon.userID];
+
+    return db.query<PokemonRow>(sql, params)
+        .then(result => result.rows.map(r => Pokemon.from(r))[0]);
 
 }
 
 export function patchPokemon(pokemon: Pokemon): Promise<Pokemon> {
-    const sql = `UPDATE people SET name = COALESCE($1, name), \
+    const sql = `UPDATE project0.pokemon SET name = COALESCE($1, name), \
 species = COALESCE($2, species), box_id = COALESCE($3, box_id), \
 user_id = COALESCE($4, user_id WHERE id = $5 RETURNING *`;
 
