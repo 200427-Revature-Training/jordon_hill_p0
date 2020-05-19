@@ -5,3 +5,9 @@ src/services/people-service.ts
 src/routers/user-router.ts
 src/routers/people-router.ts
 src/models/Person.ts
+__tests__/people-service.test.ts
+coverage
+jest.config.js
+jest.config.ts
+__tests__/routers/people-router.test.ts
+__tests__/services/people-service.test.ts

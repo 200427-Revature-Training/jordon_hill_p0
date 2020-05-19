@@ -11,7 +11,7 @@ export class Pokemon {
      */
     static from(obj: PokemonRow): Pokemon {
         const pokemon = new Pokemon(
-            obj.id, obj.name, obj.species, obj.boxID, obj.userID
+            obj.id, obj.name, obj.species, obj.box_id, obj.user_id
         );
         return pokemon;
     }
@@ -23,17 +23,12 @@ export class Pokemon {
         this.boxID = boxID;
         this.userID = userID;
     }
-
-    /* Alternatively use this without property declaration */
-    // constructor(private id: number, private name: string,
-    //             private species: string, private boxID: Date) {
-    // }
 }
 
 export interface PokemonRow {
     id: number;
     name: string;
     species: string;
-    boxID: number;
-    userID: number;
+    box_id: number;
+    user_id: number;
 }

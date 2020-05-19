@@ -18,8 +18,8 @@ app.use(bodyParser.json());
 /*
     ? Router Registration
 */
-app.use('/people', peopleRouter);
-app.use('/pokemon', pokemonRouter);
+// app.use('/people', peopleRouter);
+// app.use('/pokemon', pokemonRouter);
 app.use('/user', userRouter);
 
 process.on('unhandledRejection', () => {

@@ -1,9 +1,18 @@
 import { User } from '../models/User';
+import { Box } from '../models/Box';
+import { Pokemon } from '../models/Pokemon';
 import * as userDao from '../daos/User-dao';
-import { resolve } from 'dns';
 
-export async function getUserByName(name: string): Promise<User> {
+export function getUserByName(name: string): Promise<User> {
     return userDao.getUserByName(name);
+}
+
+export function getBoxesByUserID(userID: number): Promise<Box[]> {
+    return userDao.getBoxesByUserID(userID);
+}
+
+export function getPokemonInBoxForUser(userID: number, boxID: number): Promise<Pokemon[]>  {
+    return userDao.getPokemonInBoxForUser(userID, boxID);
 }
 
 export async function saveUser(user: any): Promise<User> {
@@ -11,14 +20,17 @@ export async function saveUser(user: any): Promise<User> {
     const newUser = new User(
         undefined, user.name
     );
-    //check if user exists
+    // check if user exists
     const promise = await getUserByName(newUser.name);
     if(!promise) {
         // Data is valid - Continue submitting to DAO
         return userDao.saveUser(newUser);
     } else {
-        // TODO: We should fail here, probably issue some kind of 400
         console.warn('User already exists');
         return new Promise((resolve, reject) => reject(409));
     }
+}
+
+export function withdrawPokemon(uid: number, bid: number, pid: number):Promise<Pokemon> {
+    return userDao.withdrawPokemon(uid, bid, pid);
 }
