@@ -3,7 +3,7 @@ export class User {
     name: string;
 
     /**
-     * Static function for creating a Pokemon instance from the structure the
+     * Static function for creating a User instance from the structure the
      * database gives us
      */
     static from(obj: UserRow): User {
@@ -17,11 +17,6 @@ export class User {
         this.id = id;
         this.name = name;
     }
-
-    /* Alternatively use this without property declaration */
-    // constructor(private id: number, private name: string,
-    //             private species: string, private boxID: Date) {
-    // }
 }
 
 export interface UserRow {

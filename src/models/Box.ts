@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 export class Box {
     id: number;
     name: string;
