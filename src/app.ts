@@ -1,8 +1,8 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import { db } from './daos/db';
-import { peopleRouter } from './routers/people-router';
 import { pokemonRouter } from './routers/pokemon-router';
+import { boxRouter } from './routers/box-router';
 import { userRouter } from './routers/user-router';
 
 const app = express();
@@ -18,9 +18,9 @@ app.use(bodyParser.json());
 /*
     ? Router Registration
 */
-// app.use('/people', peopleRouter);
-// app.use('/pokemon', pokemonRouter);
 app.use('/user', userRouter);
+app.use('/box', boxRouter);
+app.use('/pokemon', pokemonRouter);
 
 process.on('unhandledRejection', () => {
     db.end().then(() => {

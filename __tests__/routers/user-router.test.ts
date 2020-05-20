@@ -39,56 +39,6 @@ describe('GET /user/:user', () => {
     });
 });
 
-describe('GET /user/:userID/box', () => {
-    test('Normal behavior Json with status 200', async () => {
-        mockUserService.getBoxesByUserID.mockImplementation(async () => []);
-        await request(app)
-            .get('/user/1/box')
-            .expect(200)
-            .expect('content-type', 'application/json; charset=utf-8');
-    });
-    test('No object found (404)', async() => {
-        mockUserService.getBoxesByUserID
-            .mockImplementation(async () => (0));
-
-        await request(app)
-            .get('/user/0/box')
-            .expect(404);
-    });
-    test('500 internal server error', async() => {
-        mockUserService.getBoxesByUserID
-            .mockImplementation(async () => {throw new Error()});
-
-        await request(app)
-            .get('/user/something/box')
-            .expect(500)
-    });
-});
-
-describe('GET /user/:userID/box/boxID', () => {
-    test('Normal behavior Json with status 200', async () => {
-        mockUserService.getPokemonInBoxForUser.mockImplementation(async () => []);
-        await request(app)
-            .get('/user/1/box/1')
-            .expect(200)
-            .expect('content-type', 'application/json; charset=utf-8');
-    });
-    test('No object found (404)', async() => {
-        mockUserService.getPokemonInBoxForUser.mockImplementation(async () => (0));
-
-        await request(app)
-            .get('/user/1/box/0')
-            .expect(404);
-    });
-    test('500 internal server error', async() => {
-        mockUserService.getPokemonInBoxForUser.mockImplementation(async () => {throw new Error()});
-
-        await request(app)
-            .get('/user/something/box/something')
-            .expect(500)
-    });
-});
-
 describe('POST /user', () => {
     test('Successful creation should return 201 status', async () => {
         mockUserService.saveUser.mockImplementation(async () => ({}));
@@ -102,8 +52,8 @@ describe('POST /user', () => {
             .expect(201)
             .expect('content-type', 'application/json; charset=utf-8')
     });
-
-    test('Should return "Username already in use" when encountering an error', async () => {
+/*
+    test('Should return 409 when encountering an error', async () => {
         mockUserService.saveUser.mockImplementation(async () => {throw new Error()});
 
         const payload = {
@@ -113,6 +63,7 @@ describe('POST /user', () => {
         await request(app)
             .post('/user')
             .send(payload)
-            .expect("Username already in use");
+            .expect(409);
     });
+*/
 });

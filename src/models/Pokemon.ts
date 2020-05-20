@@ -1,7 +1,7 @@
 export class Pokemon {
     id: number;
     name: string;
-    species: string;
+    speciesID: number;
     boxID: number;
     userID: number;
 
@@ -11,15 +11,15 @@ export class Pokemon {
      */
     static from(obj: PokemonRow): Pokemon {
         const pokemon = new Pokemon(
-            obj.id, obj.name, obj.species, obj.box_id, obj.user_id
+            obj.id, obj.name, obj.species_id, obj.box_id, obj.user_id
         );
         return pokemon;
     }
 
-    constructor(id: number, name: string, species: string, boxID: number, userID: number) {
+    constructor(id: number, name: string, speciesID: number, boxID: number, userID: number) {
         this.id = id;
         this.name = name;
-        this.species = species;
+        this.speciesID = speciesID;
         this.boxID = boxID;
         this.userID = userID;
     }
@@ -28,7 +28,7 @@ export class Pokemon {
 export interface PokemonRow {
     id: number;
     name: string;
-    species: string;
+    species_id: number;
     box_id: number;
     user_id: number;
 }

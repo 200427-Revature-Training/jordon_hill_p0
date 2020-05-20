@@ -1,47 +1,21 @@
 import { Pokemon } from '../models/Pokemon';
 import * as pokemonDao from '../daos/pokemon-dao';
 
-export function getAllPokemon(): Promise<Pokemon[]> {
-    // Apply internal business logic
-    return pokemonDao.getAllPokemon();
+export function getPokemonInBoxForUser(userID: number, boxID: number): Promise<Pokemon[]>  {
+    return pokemonDao.getPokemonInBoxForUser(userID, boxID);
 }
 
-export function getPokemonById(id: number): Promise<Pokemon> {
-    // Apply internal business logic
-    return pokemonDao.getPokemonById(id);
-}
-
-export function savePokemon(pokemon: any): Promise<Pokemon> {
-
-    console.log(pokemon);
-    // Data from the user cannot be trusted
+export function depositPokemon(pokemon: any): Promise<Pokemon> {
     const newPokemon = new Pokemon(
-        undefined, pokemon.name, pokemon.species,
-        pokemon.boxID, pokemon.userID
+        undefined, pokemon.name, pokemon.speciesID, pokemon.boxID, pokemon.userID
     );
-
-    // IF we're going validate it here, we probably want
-    // constraints on the db too
-
-    if(pokemon.name && pokemon.species && pokemon.boxID && pokemon.userID) {
-        // Data is valid - Continue submitting to DAO
-        return pokemonDao.savePokemon(newPokemon);
+    if (newPokemon.name && pokemon.speciesID && pokemon.boxID && pokemon.userID) {
+        return pokemonDao.depositPokemon(newPokemon);
     } else {
-        // TODO: We should fail here, probably issue some kind of 400
-        console.warn('Pokemon invalid');
         return new Promise((resolve, reject) => reject(422));
     }
 }
 
-export function patchPokemon(input: any): Promise<Pokemon> {
-    const pokemon = new Pokemon(
-        input.id, input.name,
-        input.species, input.boxID, input.userID
-    );
-
-    if (!pokemon.id) {
-        throw new Error('400');
-    }
-
-    return pokemonDao.patchPokemon(pokemon);
+export function withdrawPokemon(uid: number, bid: number, pid: number): Promise<Pokemon> {
+    return pokemonDao.withdrawPokemon(uid, bid, pid);
 }
