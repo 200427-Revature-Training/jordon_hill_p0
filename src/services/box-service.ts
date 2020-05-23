@@ -1,4 +1,4 @@
-import { Box } from '../models/box';
+import { Box } from '../models/Box';
 import * as boxDao from '../daos/box-dao';
 
 /**
