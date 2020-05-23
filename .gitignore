@@ -2,7 +2,6 @@ node_modules
 express_example.ts
 src/daos/people-dao.ts
 src/services/people-service.ts
-src/routers/user-router.ts
 src/routers/people-router.ts
 src/models/Person.ts
 __tests__/people-service.test.ts
