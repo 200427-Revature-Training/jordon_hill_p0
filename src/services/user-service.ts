@@ -1,5 +1,5 @@
 import { User } from '../models/User';
-import * as userDao from '../daos/User-dao';
+import * as userDao from '../daos/user-dao';
 
 /**
  * getUserByName
