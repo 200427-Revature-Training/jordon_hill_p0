@@ -12,7 +12,7 @@ import { Species, SpeciesRow } from '../models/Species';
  */
 export function getPokemonInBoxForUser(userID: number, boxID: number): Promise<any[]> {
     const sql = 'SELECT pokemon.id, pokemon.name, species.name as "species" FROM project0.pokemon \
-        Right JOIN project0.species ON pokemon.species_id = species.id WHERE user_id = $1 AND box_id = $2';
+        Right JOIN project0.species ON pokemon.species_id = species.id WHERE user_id = $1 AND box_id = $2 ORDER BY pokemon.id';
 
     return db.query<PokemonRow>(sql, [userID, boxID]).then(result => result.rows.map(row => row));
 }
