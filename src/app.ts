@@ -14,7 +14,12 @@ app.set('port', port);
     ? Middleware Registration
 */
 app.use(bodyParser.json());
-
+app.use((request, response, next) => {
+    response.setHeader("Access-Control-Allow-Origin", "*");
+    response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    response.setHeader("Access-Control-Allow-Methods", "GET, POST, DELETE")
+    next();
+});
 /*
     ? Router Registration
 */

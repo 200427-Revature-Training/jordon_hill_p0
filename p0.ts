@@ -3,7 +3,7 @@ Jordon Hill
 Revature
 Project 0
 p0.ts
-*/
+
 
 import axios from 'axios';
 import express from 'express';
@@ -27,7 +27,7 @@ function getPokemon(pokemon) {
         return "Pokemon not found.";
     });
 }
-*/
+
 app.get("", async (request, response, next) => {
     console.log("Request received - processing at app.get");
     //response.json(users);
@@ -64,3 +64,4 @@ app.listen(port, () => {
 });
 
 //getPokemon("pikachu");
+*/

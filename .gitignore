@@ -11,3 +11,5 @@ jest.config.js
 jest.config.ts
 __tests__/routers/people-router.test.ts
 __tests__/services/people-service.test.ts
+p0.ts
+p0.js

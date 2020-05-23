@@ -22,9 +22,22 @@ pokemonRouter.get('/:userID/:boxID', (request, response, next) => {
     })
 });
 
+// get a list of all pokemon species
+pokemonRouter.get('/species', (request, response, next) => {
+    pokemonService.getSpeciesList().then(speciesList => {
+        response.json(speciesList);
+        next();
+    }).catch(err => {
+        console.log(err);
+        response.sendStatus(500);
+        next();
+    })
+});
+
 // deposit pokemon
 pokemonRouter.post('', (request, response, next) => {
     const pokemon = request.body;
+    console.log(pokemon);
     pokemonService.depositPokemon(pokemon)
         .then(newPokemon => {
             response.status(201);
@@ -46,7 +59,7 @@ pokemonRouter.delete('/:userID/:boxID/:pokemonID', (request, response, next) => 
         if (!pokemon) {
             response.sendStatus(404);
         } else {
-            response.status(204);
+            response.status(200);
             response.json(pokemon);
         }
         next();

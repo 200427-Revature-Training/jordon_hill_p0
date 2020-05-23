@@ -1,4 +1,5 @@
 import { Pokemon } from '../models/Pokemon';
+import { Species } from '../models/Species';
 import * as pokemonDao from '../daos/pokemon-dao';
 
 /**
@@ -9,6 +10,14 @@ import * as pokemonDao from '../daos/pokemon-dao';
  */
 export function getPokemonInBoxForUser(userID: number, boxID: number): Promise<Pokemon[]>  {
     return pokemonDao.getPokemonInBoxForUser(userID, boxID);
+}
+
+/**
+ * getSpeciesList:
+ * This function returns an array of all pokemon species in the database.
+ */
+export function getSpeciesList(): Promise<Species[]>  {
+    return pokemonDao.getSpeciesList();
 }
 
 /**

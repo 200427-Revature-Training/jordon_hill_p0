@@ -1,8 +1,7 @@
 /* istanbul ignore file */
 export class Box {
     id: number;
-    name: string;
-    numPokemon: number;
+    name: string
 
     /**
      * Static function for creating a Pokemon instance from the structure the
@@ -10,21 +9,18 @@ export class Box {
      */
     static from(obj: BoxRow): Box {
         const box = new Box(
-            obj.id, obj.box_name, parseInt(obj.num_users_pokemon_in_box, 10)
-
+            obj.id, obj.name
         );
         return box;
     }
 
-    constructor(id: number, name: string, numPokemon: number) {
+    constructor(id: number, name: string) {
         this.id = id;
         this.name = name;
-        this.numPokemon = numPokemon;
     }
 }
 
 export interface BoxRow {
     id: number;
-    box_name: string;
-    num_users_pokemon_in_box: string;
+    name: string;
 }

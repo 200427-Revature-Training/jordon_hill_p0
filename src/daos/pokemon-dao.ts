@@ -1,6 +1,7 @@
 /* istanbul ignore file */
 import { db } from '../daos/db';
 import { Pokemon, PokemonRow } from '../models/Pokemon';
+import { Species, SpeciesRow } from '../models/Species';
 
 /**
  * getPokemonInBoxForUser:
@@ -14,6 +15,16 @@ export function getPokemonInBoxForUser(userID: number, boxID: number): Promise<a
         Right JOIN project0.species ON pokemon.species_id = species.id WHERE user_id = $1 AND box_id = $2';
 
     return db.query<PokemonRow>(sql, [userID, boxID]).then(result => result.rows.map(row => row));
+}
+
+/**
+ * getSpeciesList:
+ * This function returns an array of all pokemon species in the database.
+ */
+export function getSpeciesList(): Promise<Species[]> {
+    const sql = 'SELECT * FROM project0.species ORDER BY id';
+
+    return db.query<SpeciesRow>(sql).then(result => result.rows.map(row => Species.from(row)));
 }
 
 /**
