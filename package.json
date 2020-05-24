@@ -23,7 +23,7 @@
   },
   "scripts": {
     "start": "nodemon ./src/app.ts",
-    "test": "jest --verbose --coverage"
+    "test": "jest --verbose --coverage",
     "stop": "pkill --signal SIGINT myApp"
   },
   "author": "",
