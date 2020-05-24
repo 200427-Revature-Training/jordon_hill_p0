@@ -24,6 +24,7 @@
   "scripts": {
     "start": "nodemon ./src/app.ts",
     "test": "jest --verbose --coverage"
+    "stop": "pkill --signal SIGINT myApp"
   },
   "author": "",
   "license": "ISC",

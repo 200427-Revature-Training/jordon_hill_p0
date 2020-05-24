@@ -27,6 +27,7 @@ userRouter.get('/:user', (request, response, next) => {
 // add user to database
 userRouter.post('', (request, response, next) => {
     const user = request.body;
+    console.log(user);
     userService.saveUser(user)
         .then(newUser => {
             response.status(201);
