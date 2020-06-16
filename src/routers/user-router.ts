@@ -42,3 +42,31 @@ userRouter.post('', (request, response, next) => {
             }
         });
 });
+
+// login
+userRouter.post('/login', (request, response, next) => {
+    userService.login(request.body)
+        .then(user => {
+            response.status(200);
+            response.json(user);
+            next();
+        }).catch(err => {
+            response.sendStatus(err);
+        });
+});
+
+// update user
+userRouter.patch('/', (request, response, next) => {
+    userService.updateUser(request.body).then(updatedUser => {
+        if(updatedUser) {
+            response.json(updatedUser);
+        } else {
+            response.sendStatus(404);
+        }
+    }).catch(err => {
+        console.log(err);
+        response.sendStatus(500);
+    }).finally(() => {
+        next();
+    })
+});

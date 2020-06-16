@@ -23,3 +23,9 @@ export function saveUser(user: User): Promise<User> {
 
     return db.query<UserRow>(sql, [user.name]).then(result => result.rows.map(row => User.from(row))[0]);
 }
+
+export function updateUser(user: User): Promise<User> {
+    const sql = 'UPDATE project0.users password_hash = COALESCE($1, password_hash) WHERE id = $2';
+
+    return db.query<UserRow>(sql, [user.password, user.id]).then(result => result.rows.map(row => User.from(row))[0]);
+}
