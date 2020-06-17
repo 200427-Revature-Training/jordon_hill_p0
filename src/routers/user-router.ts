@@ -12,6 +12,7 @@ userRouter.get('/:user', (request, response, next) => {
         if (!user) {
             response.sendStatus(404);
         } else {
+            if (user.password) user.password = "success";
             response.json(user);
         }
         next();
@@ -47,6 +48,7 @@ userRouter.post('', (request, response, next) => {
 userRouter.post('/login', (request, response, next) => {
     userService.login(request.body)
         .then(user => {
+            user.password = "success";
             response.status(200);
             response.json(user);
             next();
@@ -59,6 +61,7 @@ userRouter.post('/login', (request, response, next) => {
 userRouter.patch('/', (request, response, next) => {
     userService.updateUser(request.body).then(updatedUser => {
         if(updatedUser) {
+            updatedUser.password = "success";
             response.json(updatedUser);
         } else {
             response.sendStatus(404);
@@ -68,5 +71,5 @@ userRouter.patch('/', (request, response, next) => {
         response.sendStatus(500);
     }).finally(() => {
         next();
-    })
+    });
 });
