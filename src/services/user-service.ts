@@ -56,12 +56,13 @@ export async function login(loginData: any): Promise<User> {
 }
 
 export function updateUser(user: any): Promise<User> {
+    if (user.password.length < 6) return new Promise((resolve, reject) => reject(400));
     const hashedPassword = (user.password ? hash.generate(user.password) : undefined);
     const userData = new User(
         user.id, user.name, hashedPassword
     );
     if (!userData.id) {
-        return new Promise((resolve, reject) => reject(400));
+        return new Promise((resolve, reject) => reject(422));
     }
     return userDao.updateUser(userData);
 }
